@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Figurinhas 26">
+<title>Figurinhas Copa 2026</title>
+<script>
+// Gera ícone só com texto
+(function(){
+  const c = document.createElement('canvas');
+  c.width = c.height = 512;
+  const ctx = c.getContext('2d');
+
+  // Fundo degradê azul escuro
+  const bg = ctx.createLinearGradient(0, 0, 0, 512);
+  bg.addColorStop(0, '#1a5fa8');
+  bg.addColorStop(1, '#0d3d6e');
+  ctx.fillStyle = bg;
+  ctx.beginPath();
+  ctx.roundRect(0, 0, 512, 512, 90);
+  ctx.fill();
+
+  // Faixa arco-íris no topo
+  const grad = ctx.createLinearGradient(0, 0, 512, 0);
+  grad.addColorStop(0,    '#1a5fa8');
+  grad.addColorStop(0.17, '#2bbcb0');
+  grad.addColorStop(0.34, '#2e9e52');
+  grad.addColorStop(0.50, '#f9c224');
+  grad.addColorStop(0.67, '#f4821f');
+  grad.addColorStop(0.83, '#d62828');
+  grad.addColorStop(1,    '#7b4fa6');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.roundRect(0, 0, 512, 22, [90, 90, 0, 0]);
+  ctx.fill();
+
+  // Faixa arco-íris embaixo
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.roundRect(0, 490, 512, 22, [0, 0, 90, 90]);
+  ctx.fill();
+
+  // "FIGURINHAS" — linha 1
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 72px system-ui,-apple-system,sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('FIGURINHAS', 256, 185);
+
+  // "COPA" — linha 2 menor, amarelo
+  ctx.fillStyle = '#f9c224';
+  ctx.font = 'bold 80px system-ui,-apple-system,sans-serif';
+  ctx.fillText('COPA', 256, 290);
+
+  // "2026" — linha 3 grande branco
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 130px system-ui,-apple-system,sans-serif';
+  ctx.fillText('2026', 256, 410);
+
+  // Injeta como link
+  const link = document.createElement('link');
+  link.rel = 'apple-touch-icon';
+  link.href = c.toDataURL('image/png');
+  document.head.appendChild(link);
+})();
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:#1a5fa8; --red:#d62828; --orange:#f4821f; --yellow:#c8960a;
+    --green:#2e9e52; --teal:#2bbcb0; --purple:#7b4fa6;
+    --bg:#f0f4f8; --white:#ffffff; --surf2:#e8f0fa;
+    --text:#0d1a2d; --muted:#6a84a0; --border:#d0dff0;
+  }
+  body {
+    background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,sans-serif;
+    overflow-x:hidden; min-height:100vh; padding-bottom:80px;
+  }
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 55% 35% at 5% 10%, rgba(26,95,168,.10) 0%,transparent 70%),
+      radial-gradient(ellipse 40% 30% at 95% 5%, rgba(214,40,40,.08) 0%,transparent 60%),
+      radial-gradient(ellipse 45% 30% at 90% 60%,rgba(244,130,31,.07)0%,transparent 65%),
+      radial-gradient(ellipse 40% 30% at 8% 85%, rgba(46,158,82,.07) 0%,transparent 60%);
+  }
+  #app{position:relative;z-index:1;}
+
+  /* HEADER */
+  .header{padding:20px 16px 0;text-align:center;}
+  .rainbow{height:5px;border-radius:99px;margin-bottom:14px;
+    background:linear-gradient(90deg,var(--blue),var(--teal),var(--green),var(--yellow),var(--orange),var(--red),var(--purple));}
+  .badge{display:inline-block;background:var(--blue);color:#fff;padding:3px 14px;
+    border-radius:99px;font-size:10px;font-weight:700;letter-spacing:2px;
+    text-transform:uppercase;margin-bottom:8px;}
+  .title{font-size:clamp(28px,8vw,58px);font-weight:900;line-height:.95;color:var(--blue);}
+  .title span{color:var(--red);display:block;}
+
+  /* STATS */
+  .stats{display:flex;margin:16px 16px 0;background:var(--white);border:1px solid var(--border);
+    border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(26,95,168,.08);}
+  .stat{flex:1;padding:14px 8px;text-align:center;border-right:1px solid var(--border);}
+  .stat:last-child{border-right:none;}
+  .stat-num{font-size:28px;font-weight:900;line-height:1;}
+  .stat-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px;}
+
+  /* PROGRESS */
+  .prog-wrap{margin:12px 16px 0;}
+  .prog-bar{height:10px;background:var(--border);border-radius:99px;overflow:hidden;}
+  .prog-fill{height:100%;border-radius:99px;width:0%;
+    background:linear-gradient(90deg,var(--blue),var(--teal),var(--green),var(--yellow),var(--orange),var(--red));
+    transition:width .5s cubic-bezier(.4,0,.2,1);}
+  .prog-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px;}
+
+  /* CONTROLS */
+  .controls{display:flex;gap:8px;flex-wrap:wrap;margin:14px 16px 0;}
+  .search{flex:1;min-width:160px;background:var(--white);border:1px solid var(--border);
+    border-radius:10px;padding:10px 13px;color:var(--text);font-size:14px;outline:none;-webkit-appearance:none;}
+  .search:focus{border-color:var(--blue);}
+  .fbtn{background:var(--white);border:1px solid var(--border);border-radius:10px;
+    padding:10px 16px;color:var(--muted);font-weight:600;font-size:13px;
+    cursor:pointer;white-space:nowrap;-webkit-appearance:none;}
+  .fbtn.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+  /* CONTENT */
+  .content{padding:14px 16px 20px;}
+  .sec-lbl{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--muted);
+    text-align:center;padding:10px 0 4px;text-transform:uppercase;}
+
+  /* BLOCK */
+  .block{margin-bottom:12px;background:var(--white);border:1px solid var(--border);
+    border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(26,95,168,.05);}
+  .block.hidden{display:none;}
+  .block-hdr{display:flex;align-items:center;justify-content:space-between;
+    padding:12px 14px;background:var(--surf2);border-bottom:1px solid var(--border);
+    cursor:pointer;border-left:4px solid var(--blue);-webkit-tap-highlight-color:transparent;}
+  .block-hdr-l{display:flex;align-items:baseline;gap:8px;}
+  .block-ttl{font-size:15px;font-weight:800;color:var(--text);}
+  .block-sub{font-size:11px;color:var(--muted);}
+  .block-hdr-r{display:flex;align-items:center;gap:10px;}
+  .block-cnt{font-size:12px;color:var(--muted);}
+  .block-cnt strong{color:var(--green);}
+  .chevron{width:16px;height:16px;color:var(--muted);transition:transform .25s;flex-shrink:0;}
+  .block.collapsed .chevron{transform:rotate(-90deg);}
+  .block.collapsed .block-body{display:none;}
+
+  /* TEAM ROW */
+  .team-row{border-bottom:1px solid var(--border);padding:10px 14px;}
+  .team-row:last-child{border-bottom:none;}
+  .team-row.hidden{display:none;}
+  .team-info{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+  .team-name{font-weight:700;font-size:14px;flex:1;color:var(--text);}
+  .team-code{font-size:10px;color:#fff;background:var(--blue);padding:2px 8px;
+    border-radius:6px;font-weight:700;letter-spacing:.8px;}
+  .team-cnt{font-size:11px;color:var(--muted);}
+  .team-cnt strong{color:var(--green);}
+  .mbar{height:3px;background:var(--border);border-radius:99px;margin-bottom:8px;overflow:hidden;}
+  .mbar-fill{height:100%;background:var(--green);border-radius:99px;transition:width .3s;}
+
+  /* CHIPS */
+  .chip-grid{display:flex;flex-wrap:wrap;gap:5px;}
+  .chip{min-width:32px;height:32px;border-radius:7px;padding:0 5px;
+    border:2px solid var(--border);background:#f4f8fd;
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;color:var(--muted);
+    cursor:pointer;user-select:none;flex-shrink:0;
+    -webkit-tap-highlight-color:transparent;
+    transition:background .12s,border-color .12s,transform .12s;}
+  .chip.sp{min-width:44px;font-size:9px;color:var(--blue);background:#deeaf8;border-color:#c0d4ee;}
+  .chip.on{background:var(--green);border-color:var(--green);color:#fff;}
+  .chip.pop{transform:scale(1.35);}
+
+  /* FAB */
+  .fab{position:fixed;bottom:20px;right:20px;z-index:100;
+    background:var(--red);color:#fff;border:none;border-radius:50px;
+    padding:13px 22px;font-weight:700;font-size:14px;cursor:pointer;
+    letter-spacing:.3px;box-shadow:0 4px 20px rgba(214,40,40,.4);
+    -webkit-tap-highlight-color:transparent;}
+
+  /* MODAL */
+  .overlay{position:fixed;inset:0;background:rgba(13,26,45,.65);z-index:200;
+    display:flex;align-items:flex-end;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .25s;}
+  .overlay.open{opacity:1;pointer-events:all;}
+  .modal{background:var(--white);border:1px solid var(--border);
+    border-radius:22px 22px 0 0;padding:24px 20px 44px;
+    width:100%;max-width:480px;
+    transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);}
+  .overlay.open .modal{transform:translateY(0);}
+  .modal h2{font-size:20px;font-weight:900;margin-bottom:6px;color:var(--text);}
+  .modal p{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.5;}
+  .modal-btns{display:flex;gap:10px;}
+  .btn-cancel{flex:1;padding:13px;border:1px solid var(--red);border-radius:12px;
+    background:rgba(214,40,40,.07);color:var(--red);font-weight:700;font-size:15px;cursor:pointer;}
+  .btn-confirm{flex:1;padding:13px;border:none;border-radius:12px;
+    background:var(--red);color:#fff;font-weight:700;font-size:15px;cursor:pointer;}
+
+  /* TOAST */
+  .toast{position:fixed;bottom:80px;left:50%;
+    transform:translateX(-50%) translateY(16px);
+    background:var(--green);color:#fff;padding:9px 22px;border-radius:50px;
+    font-weight:700;font-size:13px;z-index:300;
+    opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <div class="rainbow"></div>
+    <div class="badge">Album Digital</div>
+    <div class="title">FIGURINHAS <span>COPA 2026</span></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num" style="color:var(--blue)" id="stt">994</div><div class="stat-lbl">Total</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--green)" id="stc">0</div><div class="stat-lbl">Coladas</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--red)" id="stm">994</div><div class="stat-lbl">Faltando</div></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-bar"><div class="prog-fill" id="pfill"></div></div>
+    <div class="prog-label">
+      <strong id="ppct" style="color:var(--blue)">0% concluído</strong>
+      <span id="pcnt">0 de 994 figurinhas</span>
+    </div>
+  </div>
+  <div class="controls">
+    <input class="search" type="search" placeholder="Buscar time ou grupo..." id="srch">
+    <button class="fbtn active" data-f="all">Todos</button>
+    <button class="fbtn" data-f="missing">Faltando</button>
+    <button class="fbtn" data-f="collected">Coladas</button>
+  </div>
+  <div class="content" id="content"></div>
+</div>
+
+<button class="fab" id="fab">Resetar Album</button>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2>Tem certeza?</h2>
+    <p>Todas as figurinhas marcadas serão desmarcadas e o progresso será perdido. Esta ação não pode ser desfeita.</p>
+    <div class="modal-btns">
+      <button class="btn-cancel" id="btn-cancel">Cancelar</button>
+      <button class="btn-confirm" id="btn-confirm">Sim, resetar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Album resetado com sucesso!</div>
+
+<script>
+const GCOLS=['#1a5fa8','#d62828','#f4821f','#2e9e52','#7b4fa6','#2bbcb0','#c8960a','#1a5fa8','#d62828','#f4821f','#2e9e52','#7b4fa6'];
+const GRUPOS=[
+  {id:'A',teams:[{name:'México',code:'MEX'},{name:'África do Sul',code:'RSA'},{name:'Coreia do Sul',code:'KOR'},{name:'Rep. Tcheca',code:'CZE'}]},
+  {id:'B',teams:[{name:'Canadá',code:'CAN'},{name:'Bósnia',code:'BIH'},{name:'Catar',code:'QAT'},{name:'Suíça',code:'SUI'}]},
+  {id:'C',teams:[{name:'Brasil',code:'BRA'},{name:'Marrocos',code:'MAR'},{name:'Haiti',code:'HAI'},{name:'Escócia',code:'SCO'}]},
+  {id:'D',teams:[{name:'Estados Unidos',code:'USA'},{name:'Paraguai',code:'PAR'},{name:'Austrália',code:'AUS'},{name:'Turquia',code:'TUR'}]},
+  {id:'E',teams:[{name:'Alemanha',code:'GER'},{name:'Curaçao',code:'CUW'},{name:'Costa do Marfim',code:'CIV'},{name:'Equador',code:'ECU'}]},
+  {id:'F',teams:[{name:'Holanda',code:'NED'},{name:'Japão',code:'JPN'},{name:'Suécia',code:'SWE'},{name:'Tunísia',code:'TUN'}]},
+  {id:'G',teams:[{name:'Bélgica',code:'BEL'},{name:'Egito',code:'EGY'},{name:'Irã',code:'IRN'},{name:'Nova Zelândia',code:'NZL'}]},
+  {id:'H',teams:[{name:'Espanha',code:'ESP'},{name:'Cabo Verde',code:'CPV'},{name:'Arábia Saudita',code:'KSA'},{name:'Uruguai',code:'URU'}]},
+  {id:'I',teams:[{name:'França',code:'FRA'},{name:'Senegal',code:'SEN'},{name:'Iraque',code:'IRQ'},{name:'Noruega',code:'NOR'}]},
+  {id:'J',teams:[{name:'Argentina',code:'ARG'},{name:'Argélia',code:'ALG'},{name:'Áustria',code:'AUT'},{name:'Jordânia',code:'JOR'}]},
+  {id:'K',teams:[{name:'Portugal',code:'POR'},{name:'Congo',code:'COD'},{name:'Uzbequistão',code:'UZB'},{name:'Colômbia',code:'COL'}]},
+  {id:'L',teams:[{name:'Inglaterra',code:'ENG'},{name:'Croácia',code:'CRO'},{name:'Gana',code:'GHA'},{name:'Panamá',code:'PAN'}]},
+];
+const ESP_IDS  = ['ESP_OO',...Array.from({length:19},(_,i)=>`ESP_FWC${i+1}`)];
+const ESP_LBLS = ['OO',    ...Array.from({length:19},(_,i)=>`FWC${i+1}`)];
+const CC_IDS   = Array.from({length:14},(_,i)=>`CC_${i+1}`);
+const CC_LBLS  = Array.from({length:14},(_,i)=>`CC${i+1}`);
+const tIds  = c=>Array.from({length:20},(_,i)=>`${c}_${i+1}`);
+const tLbls = ()=>Array.from({length:20},(_,i)=>String(i+1));
+const ALL   = [...ESP_IDS,...CC_IDS,...GRUPOS.flatMap(g=>g.teams.flatMap(t=>tIds(t.code)))];
+
+const SK='copa2026_v5';
+let S={};
+try{S=JSON.parse(localStorage.getItem(SK)||'{}');}catch{}
+let filt='all', srchStr='';
+function save(){try{localStorage.setItem(SK,JSON.stringify(S));}catch{}}
+
+function updStats(){
+  const tot=ALL.length, col=ALL.filter(id=>S[id]).length, mis=tot-col, pct=Math.round(col/tot*100);
+  document.getElementById('stt').textContent=tot;
+  document.getElementById('stc').textContent=col;
+  document.getElementById('stm').textContent=mis;
+  document.getElementById('pfill').style.width=pct+'%';
+  document.getElementById('ppct').textContent=pct+'% concluído';
+  document.getElementById('pcnt').textContent=col+' de '+tot+' figurinhas';
+}
+
+function updRing(block){
+  const chips=[...block.querySelectorAll('.chip')];
+  if(!chips.length)return;
+  const tot=chips.length, col=chips.filter(c=>c.classList.contains('on')).length, pct=Math.round(col/tot*100);
+  const CI=2*Math.PI*13;
+  const fg=block.querySelector('.ring-fg');
+  const tx=block.querySelector('.ring-tx');
+  const cn=block.querySelector('.block-cnt');
+  if(fg)fg.setAttribute('stroke-dashoffset',CI*(1-pct/100));
+  if(tx)tx.textContent=pct+'%';
+  if(cn)cn.innerHTML='<strong>'+col+'</strong>/'+tot;
+}
+
+function toggleChip(el,id,teamCode){
+  if(S[id]){delete S[id];el.classList.remove('on');}
+  else{S[id]=1;el.classList.add('on');el.classList.add('pop');setTimeout(()=>el.classList.remove('pop'),260);}
+  save(); updStats();
+  if(teamCode){
+    const ids=tIds(teamCode), col=ids.filter(i=>S[i]).length, pct=Math.round(col/ids.length*100);
+    const bar=document.getElementById('mb-'+teamCode);
+    const cnt=document.getElementById('tc-'+teamCode);
+    if(bar)bar.style.width=pct+'%';
+    if(cnt)cnt.innerHTML='<strong>'+col+'</strong>/20';
+  }
+  updRing(el.closest('.block'));
+  applyFilter();
+}
+
+function mkChip(id,lbl,teamCode){
+  const sp=isNaN(Number(lbl))||lbl.startsWith('FWC')||lbl.startsWith('CC')||lbl==='OO';
+  const el=document.createElement('div');
+  el.className='chip'+(sp?' sp':'')+(S[id]?' on':'');
+  el.textContent=lbl;
+  el.addEventListener('click',()=>toggleChip(el,id,teamCode));
+  return el;
+}
+
+function mkTeamRow(team){
+  const ids=tIds(team.code), lbls=tLbls();
+  const col=ids.filter(id=>S[id]).length, pct=Math.round(col/ids.length*100);
+  const row=document.createElement('div');
+  row.className='team-row';
+  row.dataset.name=team.name.toLowerCase();
+  row.dataset.code=team.code.toLowerCase();
+  row.innerHTML=`
+    <div class="team-info">
+      <span class="team-name">${team.name}</span>
+      <span class="team-code">${team.code}</span>
+      <span class="team-cnt" id="tc-${team.code}"><strong>${col}</strong>/20</span>
+    </div>
+    <div class="mbar"><div class="mbar-fill" id="mb-${team.code}" style="width:${pct}%"></div></div>
+    <div class="chip-grid"></div>`;
+  const grid=row.querySelector('.chip-grid');
+  ids.forEach((id,i)=>grid.appendChild(mkChip(id,lbls[i],team.code)));
+  return row;
+}
+
+let bi=0;
+function mkBlock(title,sub,accent,chipIds,chipLbls,teams){
+  const allIds=chipIds||(teams||[]).flatMap(t=>tIds(t.code));
+  const tot=allIds.length, col=allIds.filter(i=>S[i]).length, pct=Math.round(col/tot*100);
+  const CI=2*Math.PI*13;
+  const block=document.createElement('div');
+  block.className='block'; block.dataset.bi=bi++;
+  const hdr=document.createElement('div');
+  hdr.className='block-hdr'; hdr.style.borderLeftColor=accent;
+  hdr.innerHTML=`
+    <div class="block-hdr-l">
+      <span class="block-ttl">${title}</span>
+      ${sub?`<span class="block-sub">${sub}</span>`:''}
+    </div>
+    <div class="block-hdr-r">
+      <svg width="34" height="34" viewBox="0 0 34 34" style="flex-shrink:0">
+        <circle cx="17" cy="17" r="13" fill="none" stroke="var(--border)" stroke-width="3"/>
+        <circle class="ring-fg" cx="17" cy="17" r="13" fill="none" stroke="${accent}" stroke-width="3"
+          stroke-dasharray="${CI}" stroke-dashoffset="${CI*(1-pct/100)}"
+          stroke-linecap="round" transform="rotate(-90 17 17)" style="transition:stroke-dashoffset .5s"/>
+        <text class="ring-tx" x="17" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="var(--text)">${pct}%</text>
+      </svg>
+      <span class="block-cnt"><strong>${col}</strong>/${tot}</span>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </div>`;
+  hdr.addEventListener('click',()=>block.classList.toggle('collapsed'));
+  const body=document.createElement('div');
+  body.className='block-body';
+  if(teams){
+    teams.forEach(t=>body.appendChild(mkTeamRow(t)));
+  } else {
+    const g=document.createElement('div');
+    g.className='chip-grid'; g.style.padding='12px 14px';
+    chipIds.forEach((id,i)=>g.appendChild(mkChip(id,chipLbls[i],null)));
+    body.appendChild(g);
+  }
+  block.appendChild(hdr); block.appendChild(body);
+  return block;
+}
+
+function render(){
+  const c=document.getElementById('content'); c.innerHTML='';
+  c.appendChild(mkBlock('Especiais','OO + FWC 1–19','#c8960a',ESP_IDS,ESP_LBLS,null));
+  c.appendChild(mkBlock('Coca-Cola','CC1–CC14','#d62828',CC_IDS,CC_LBLS,null));
+  const lbl=document.createElement('div'); lbl.className='sec-lbl'; lbl.textContent='Grupos';
+  c.appendChild(lbl);
+  GRUPOS.forEach((g,i)=>c.appendChild(mkBlock('Grupo '+g.id,g.teams.map(t=>t.code).join(' · '),GCOLS[i],null,null,g.teams)));
+  updStats();
+}
+
+function applyFilter(){
+  const f=filt, s=srchStr;
+  document.querySelectorAll('.team-row').forEach(row=>{
+    const ok=!s||row.dataset.name.includes(s)||row.dataset.code.includes(s);
+    if(!ok){row.classList.add('hidden');return;}
+    const chips=[...row.querySelectorAll('.chip')];
+    const hasOn=chips.some(c=>c.classList.contains('on'));
+    const hasOff=chips.some(c=>!c.classList.contains('on'));
+    if(f==='collected'&&!hasOn){row.classList.add('hidden');return;}
+    if(f==='missing'&&!hasOff){row.classList.add('hidden');return;}
+    row.classList.remove('hidden');
+    chips.forEach(c=>{
+      const on=c.classList.contains('on');
+      c.style.opacity=(f==='collected'&&!on)||(f==='missing'&&on)?'0.18':'1';
+    });
+  });
+  document.querySelectorAll('.block').forEach(block=>{
+    const rows=[...block.querySelectorAll('.team-row')];
+    if(!rows.length){block.classList.remove('hidden');return;}
+    block.classList.toggle('hidden',!rows.some(r=>!r.classList.contains('hidden')));
+  });
+}
+
+document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); filt=b.dataset.f; applyFilter();
+}));
+document.getElementById('srch').addEventListener('input',e=>{srchStr=e.target.value.toLowerCase().trim();applyFilter();});
+document.getElementById('fab').addEventListener('click',()=>document.getElementById('overlay').classList.add('open'));
+document.getElementById('btn-cancel').addEventListener('click',()=>document.getElementById('overlay').classList.remove('open'));
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))document.getElementById('overlay').classList.remove('open');});
+document.getElementById('btn-confirm').addEventListener('click',()=>{
+  S={}; save();
+  document.getElementById('overlay').classList.remove('open');
+  document.querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));
+  document.querySelectorAll('.mbar-fill').forEach(b=>b.style.width='0%');
+  document.querySelectorAll('[id^="tc-"]').forEach(el=>el.innerHTML='<strong>0</strong>/20');
+  document.querySelectorAll('.block').forEach(b=>updRing(b));
+  updStats();
+  const t=document.getElementById('toast'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200);
+});
+
+render();
+</script>
+</body>
+</html>
