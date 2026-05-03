@@ -13,7 +13,7 @@
   const c = document.createElement('canvas');
   c.width = c.height = 512;
   const ctx = c.getContext('2d');
-
+ 
   // Fundo degradê azul escuro
   const bg = ctx.createLinearGradient(0, 0, 0, 512);
   bg.addColorStop(0, '#1a5fa8');
@@ -22,7 +22,7 @@
   ctx.beginPath();
   ctx.roundRect(0, 0, 512, 512, 90);
   ctx.fill();
-
+ 
   // Faixa arco-íris no topo
   const grad = ctx.createLinearGradient(0, 0, 512, 0);
   grad.addColorStop(0,    '#1a5fa8');
@@ -36,30 +36,30 @@
   ctx.beginPath();
   ctx.roundRect(0, 0, 512, 22, [90, 90, 0, 0]);
   ctx.fill();
-
+ 
   // Faixa arco-íris embaixo
   ctx.fillStyle = grad;
   ctx.beginPath();
   ctx.roundRect(0, 490, 512, 22, [0, 0, 90, 90]);
   ctx.fill();
-
+ 
   // "FIGURINHAS" — linha 1
   ctx.fillStyle = '#ffffff';
   ctx.font = 'bold 72px system-ui,-apple-system,sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('FIGURINHAS', 256, 185);
-
+ 
   // "COPA" — linha 2 menor, amarelo
   ctx.fillStyle = '#f9c224';
   ctx.font = 'bold 80px system-ui,-apple-system,sans-serif';
   ctx.fillText('COPA', 256, 290);
-
+ 
   // "2026" — linha 3 grande branco
   ctx.fillStyle = '#ffffff';
   ctx.font = 'bold 130px system-ui,-apple-system,sans-serif';
   ctx.fillText('2026', 256, 410);
-
+ 
   // Injeta como link
   const link = document.createElement('link');
   link.rel = 'apple-touch-icon';
@@ -89,7 +89,7 @@
       radial-gradient(ellipse 40% 30% at 8% 85%, rgba(46,158,82,.07) 0%,transparent 60%);
   }
   #app{position:relative;z-index:1;}
-
+ 
   /* HEADER */
   .header{padding:20px 16px 0;text-align:center;}
   .rainbow{height:5px;border-radius:99px;margin-bottom:14px;
@@ -99,7 +99,7 @@
     text-transform:uppercase;margin-bottom:8px;}
   .title{font-size:clamp(28px,8vw,58px);font-weight:900;line-height:.95;color:var(--blue);}
   .title span{color:var(--red);display:block;}
-
+ 
   /* STATS */
   .stats{display:flex;margin:16px 16px 0;background:var(--white);border:1px solid var(--border);
     border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(26,95,168,.08);}
@@ -107,7 +107,7 @@
   .stat:last-child{border-right:none;}
   .stat-num{font-size:28px;font-weight:900;line-height:1;}
   .stat-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px;}
-
+ 
   /* PROGRESS */
   .prog-wrap{margin:12px 16px 0;}
   .prog-bar{height:10px;background:var(--border);border-radius:99px;overflow:hidden;}
@@ -115,7 +115,7 @@
     background:linear-gradient(90deg,var(--blue),var(--teal),var(--green),var(--yellow),var(--orange),var(--red));
     transition:width .5s cubic-bezier(.4,0,.2,1);}
   .prog-label{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px;}
-
+ 
   /* CONTROLS */
   .controls{display:flex;gap:8px;flex-wrap:wrap;margin:14px 16px 0;}
   .search{flex:1;min-width:160px;background:var(--white);border:1px solid var(--border);
@@ -125,12 +125,12 @@
     padding:10px 16px;color:var(--muted);font-weight:600;font-size:13px;
     cursor:pointer;white-space:nowrap;-webkit-appearance:none;}
   .fbtn.active{background:var(--blue);border-color:var(--blue);color:#fff;}
-
+ 
   /* CONTENT */
   .content{padding:14px 16px 20px;}
   .sec-lbl{font-size:10px;font-weight:700;letter-spacing:3px;color:var(--muted);
     text-align:center;padding:10px 0 4px;text-transform:uppercase;}
-
+ 
   /* BLOCK */
   .block{margin-bottom:12px;background:var(--white);border:1px solid var(--border);
     border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(26,95,168,.05);}
@@ -147,7 +147,7 @@
   .chevron{width:16px;height:16px;color:var(--muted);transition:transform .25s;flex-shrink:0;}
   .block.collapsed .chevron{transform:rotate(-90deg);}
   .block.collapsed .block-body{display:none;}
-
+ 
   /* TEAM ROW */
   .team-row{border-bottom:1px solid var(--border);padding:10px 14px;}
   .team-row:last-child{border-bottom:none;}
@@ -160,7 +160,7 @@
   .team-cnt strong{color:var(--green);}
   .mbar{height:3px;background:var(--border);border-radius:99px;margin-bottom:8px;overflow:hidden;}
   .mbar-fill{height:100%;background:var(--green);border-radius:99px;transition:width .3s;}
-
+ 
   /* CHIPS */
   .chip-grid{display:flex;flex-wrap:wrap;gap:5px;}
   .chip{min-width:32px;height:32px;border-radius:7px;padding:0 5px;
@@ -173,14 +173,14 @@
   .chip.sp{min-width:44px;font-size:9px;color:var(--blue);background:#deeaf8;border-color:#c0d4ee;}
   .chip.on{background:var(--green);border-color:var(--green);color:#fff;}
   .chip.pop{transform:scale(1.35);}
-
+ 
   /* FAB */
   .fab{position:fixed;bottom:20px;right:20px;z-index:100;
     background:var(--red);color:#fff;border:none;border-radius:50px;
     padding:13px 22px;font-weight:700;font-size:14px;cursor:pointer;
     letter-spacing:.3px;box-shadow:0 4px 20px rgba(214,40,40,.4);
     -webkit-tap-highlight-color:transparent;}
-
+ 
   /* MODAL */
   .overlay{position:fixed;inset:0;background:rgba(13,26,45,.65);z-index:200;
     display:flex;align-items:flex-end;justify-content:center;
@@ -198,7 +198,7 @@
     background:rgba(214,40,40,.07);color:var(--red);font-weight:700;font-size:15px;cursor:pointer;}
   .btn-confirm{flex:1;padding:13px;border:none;border-radius:12px;
     background:var(--red);color:#fff;font-weight:700;font-size:15px;cursor:pointer;}
-
+ 
   /* TOAST */
   .toast{position:fixed;bottom:80px;left:50%;
     transform:translateX(-50%) translateY(16px);
@@ -235,9 +235,9 @@
   </div>
   <div class="content" id="content"></div>
 </div>
-
+ 
 <button class="fab" id="fab">Resetar Album</button>
-
+ 
 <div class="overlay" id="overlay">
   <div class="modal">
     <h2>Tem certeza?</h2>
@@ -248,9 +248,9 @@
     </div>
   </div>
 </div>
-
+ 
 <div class="toast" id="toast">Album resetado com sucesso!</div>
-
+ 
 <script>
 const GCOLS=['#1a5fa8','#d62828','#f4821f','#2e9e52','#7b4fa6','#2bbcb0','#c8960a','#1a5fa8','#d62828','#f4821f','#2e9e52','#7b4fa6'];
 const GRUPOS=[
@@ -274,13 +274,13 @@ const CC_LBLS  = Array.from({length:14},(_,i)=>`CC${i+1}`);
 const tIds  = c=>Array.from({length:20},(_,i)=>`${c}_${i+1}`);
 const tLbls = ()=>Array.from({length:20},(_,i)=>String(i+1));
 const ALL   = [...ESP_IDS,...CC_IDS,...GRUPOS.flatMap(g=>g.teams.flatMap(t=>tIds(t.code)))];
-
+ 
 const SK='copa2026_v5';
 let S={};
 try{S=JSON.parse(localStorage.getItem(SK)||'{}');}catch{}
 let filt='all', srchStr='';
 function save(){try{localStorage.setItem(SK,JSON.stringify(S));}catch{}}
-
+ 
 function updStats(){
   const tot=ALL.length, col=ALL.filter(id=>S[id]).length, mis=tot-col, pct=Math.round(col/tot*100);
   document.getElementById('stt').textContent=tot;
@@ -290,7 +290,7 @@ function updStats(){
   document.getElementById('ppct').textContent=pct+'% concluído';
   document.getElementById('pcnt').textContent=col+' de '+tot+' figurinhas';
 }
-
+ 
 function updRing(block){
   const chips=[...block.querySelectorAll('.chip')];
   if(!chips.length)return;
@@ -303,7 +303,7 @@ function updRing(block){
   if(tx)tx.textContent=pct+'%';
   if(cn)cn.innerHTML='<strong>'+col+'</strong>/'+tot;
 }
-
+ 
 function toggleChip(el,id,teamCode){
   if(S[id]){delete S[id];el.classList.remove('on');}
   else{S[id]=1;el.classList.add('on');el.classList.add('pop');setTimeout(()=>el.classList.remove('pop'),260);}
@@ -318,7 +318,7 @@ function toggleChip(el,id,teamCode){
   updRing(el.closest('.block'));
   applyFilter();
 }
-
+ 
 function mkChip(id,lbl,teamCode){
   const sp=isNaN(Number(lbl))||lbl.startsWith('FWC')||lbl.startsWith('CC')||lbl==='OO';
   const el=document.createElement('div');
@@ -327,7 +327,7 @@ function mkChip(id,lbl,teamCode){
   el.addEventListener('click',()=>toggleChip(el,id,teamCode));
   return el;
 }
-
+ 
 function mkTeamRow(team){
   const ids=tIds(team.code), lbls=tLbls();
   const col=ids.filter(id=>S[id]).length, pct=Math.round(col/ids.length*100);
@@ -347,7 +347,7 @@ function mkTeamRow(team){
   ids.forEach((id,i)=>grid.appendChild(mkChip(id,lbls[i],team.code)));
   return row;
 }
-
+ 
 let bi=0;
 function mkBlock(title,sub,accent,chipIds,chipLbls,teams){
   const allIds=chipIds||(teams||[]).flatMap(t=>tIds(t.code));
@@ -389,7 +389,7 @@ function mkBlock(title,sub,accent,chipIds,chipLbls,teams){
   block.appendChild(hdr); block.appendChild(body);
   return block;
 }
-
+ 
 function render(){
   const c=document.getElementById('content'); c.innerHTML='';
   c.appendChild(mkBlock('Especiais','OO + FWC 1–19','#c8960a',ESP_IDS,ESP_LBLS,null));
@@ -399,12 +399,14 @@ function render(){
   GRUPOS.forEach((g,i)=>c.appendChild(mkBlock('Grupo '+g.id,g.teams.map(t=>t.code).join(' · '),GCOLS[i],null,null,g.teams)));
   updStats();
 }
-
+ 
 function applyFilter(){
   const f=filt, s=srchStr;
+ 
+  // Times: mostrar/ocultar linhas e chips individuais
   document.querySelectorAll('.team-row').forEach(row=>{
-    const ok=!s||row.dataset.name.includes(s)||row.dataset.code.includes(s);
-    if(!ok){row.classList.add('hidden');return;}
+    const nameOk=!s||row.dataset.name.includes(s)||row.dataset.code.includes(s);
+    if(!nameOk){row.classList.add('hidden');return;}
     const chips=[...row.querySelectorAll('.chip')];
     const hasOn=chips.some(c=>c.classList.contains('on'));
     const hasOff=chips.some(c=>!c.classList.contains('on'));
@@ -413,16 +415,30 @@ function applyFilter(){
     row.classList.remove('hidden');
     chips.forEach(c=>{
       const on=c.classList.contains('on');
-      c.style.opacity=(f==='collected'&&!on)||(f==='missing'&&on)?'0.18':'1';
+      if(f==='collected') c.style.display=on?'flex':'none';
+      else if(f==='missing') c.style.display=!on?'flex':'none';
+      else c.style.display='flex';
     });
   });
+ 
+  // Blocos de grupos: oculta se sem linhas visíveis
   document.querySelectorAll('.block').forEach(block=>{
     const rows=[...block.querySelectorAll('.team-row')];
-    if(!rows.length){block.classList.remove('hidden');return;}
+    if(!rows.length){
+      // Especiais e Coca-Cola: filtra chips diretamente
+      block.querySelectorAll('.chip').forEach(c=>{
+        const on=c.classList.contains('on');
+        if(f==='collected') c.style.display=on?'flex':'none';
+        else if(f==='missing') c.style.display=!on?'flex':'none';
+        else c.style.display='flex';
+      });
+      block.classList.remove('hidden');
+      return;
+    }
     block.classList.toggle('hidden',!rows.some(r=>!r.classList.contains('hidden')));
   });
 }
-
+ 
 document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
   b.classList.add('active'); filt=b.dataset.f; applyFilter();
@@ -441,7 +457,7 @@ document.getElementById('btn-confirm').addEventListener('click',()=>{
   updStats();
   const t=document.getElementById('toast'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200);
 });
-
+ 
 render();
 </script>
 </body>
