@@ -8,60 +8,81 @@
 <meta name="apple-mobile-web-app-title" content="Figurinhas 26">
 <title>Figurinhas Copa 2026</title>
 <script>
-// Gera ícone só com texto
+// Icone inspirado no pacote Panini FIFA WC 2026
 (function(){
   const c = document.createElement('canvas');
   c.width = c.height = 512;
   const ctx = c.getContext('2d');
 
-  // Fundo degradê azul escuro
-  const bg = ctx.createLinearGradient(0, 0, 0, 512);
-  bg.addColorStop(0, '#1a5fa8');
-  bg.addColorStop(1, '#0d3d6e');
-  ctx.fillStyle = bg;
-  ctx.beginPath();
-  ctx.roundRect(0, 0, 512, 512, 90);
-  ctx.fill();
-
-  // Faixa arco-íris no topo
-  const grad = ctx.createLinearGradient(0, 0, 512, 0);
-  grad.addColorStop(0,    '#1a5fa8');
-  grad.addColorStop(0.17, '#2bbcb0');
-  grad.addColorStop(0.34, '#2e9e52');
-  grad.addColorStop(0.50, '#f9c224');
-  grad.addColorStop(0.67, '#f4821f');
-  grad.addColorStop(0.83, '#d62828');
-  grad.addColorStop(1,    '#7b4fa6');
-  ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.roundRect(0, 0, 512, 22, [90, 90, 0, 0]);
-  ctx.fill();
-
-  // Faixa arco-íris embaixo
-  ctx.fillStyle = grad;
-  ctx.beginPath();
-  ctx.roundRect(0, 490, 512, 22, [0, 0, 90, 90]);
-  ctx.fill();
-
-  // "FIGURINHAS" — linha 1
+  // Fundo branco
   ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 72px system-ui,-apple-system,sans-serif';
+  ctx.beginPath();
+  ctx.roundRect(0, 0, 512, 512, 60);
+  ctx.fill();
+
+  // Clip area interna
+  ctx.save();
+  ctx.beginPath();
+  ctx.roundRect(28, 28, 456, 456, 40);
+  ctx.clip();
+
+  // Blobs coloridos do fundo
+  var blobs = [
+    {x:0,   y:0,   r:160, color:'#1a5fa8'},
+    {x:512, y:0,   r:140, color:'#2e9e52'},
+    {x:80,  y:200, r:130, color:'#f4821f'},
+    {x:430, y:180, r:120, color:'#d62828'},
+    {x:160, y:430, r:140, color:'#7b4fa6'},
+    {x:400, y:400, r:130, color:'#2bbcb0'},
+    {x:256, y:90,  r:100, color:'#a8cde8'},
+    {x:256, y:370, r:110, color:'#8ecf6a'},
+    {x:50,  y:440, r:90,  color:'#f9c224'},
+    {x:460, y:60,  r:80,  color:'#f4821f'},
+  ];
+  blobs.forEach(function(b){
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
+    ctx.fillStyle = b.color;
+    ctx.fill();
+  });
+
+  // Faixa vermelha base
+  ctx.fillStyle = '#d62828';
+  ctx.fillRect(0, 355, 512, 145);
+
+  // Oval branco central
+  ctx.fillStyle = 'rgba(255,255,255,0.93)';
+  ctx.beginPath();
+  ctx.ellipse(256, 205, 135, 158, 0, 0, Math.PI*2);
+  ctx.fill();
+
+  ctx.restore();
+
+  // Borda branca do pacote
+  ctx.strokeStyle = '#ffffff';
+  ctx.lineWidth = 10;
+  ctx.beginPath();
+  ctx.roundRect(28, 28, 456, 456, 40);
+  ctx.stroke();
+
+  // Texto FIFA azul
+  ctx.fillStyle = '#0d3d6e';
+  ctx.font = 'bold 54px system-ui,-apple-system,sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('FIGURINHAS', 256, 185);
+  ctx.fillText('FIFA', 256, 178);
 
-  // "COPA" — linha 2 menor, amarelo
-  ctx.fillStyle = '#f9c224';
-  ctx.font = 'bold 80px system-ui,-apple-system,sans-serif';
-  ctx.fillText('COPA', 256, 290);
+  // Texto WORLD CUP menor
+  ctx.fillStyle = '#1a5fa8';
+  ctx.font = 'bold 28px system-ui,-apple-system,sans-serif';
+  ctx.fillText('WORLD CUP', 256, 235);
 
-  // "2026" — linha 3 grande branco
+  // 2026 branco na faixa vermelha
   ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 130px system-ui,-apple-system,sans-serif';
-  ctx.fillText('2026', 256, 410);
+  ctx.font = 'bold 115px system-ui,-apple-system,sans-serif';
+  ctx.fillText('2026', 256, 418);
 
-  // Injeta como link
-  const link = document.createElement('link');
+  var link = document.createElement('link');
   link.rel = 'apple-touch-icon';
   link.href = c.toDataURL('image/png');
   document.head.appendChild(link);
